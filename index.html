@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وائل عبدالعزيز | Wael Abdulaziz - معرض الأعمال البرمجية</title>
+    <title>Wael Abdulaziz - Software Engineer & Systems Support Specialist</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Arabic (Cairo) -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Cairo Arabic & Inter English -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -16,7 +16,8 @@
             --sidebar-bg: #161b22;
             --primary-blue: #2f81f7;
             --hover-blue: #58a6ff;
-            --accent-purple: #8957e5;
+            --btn-bg: #21262d;
+            --btn-hover: #30363d;
             --text-main: #f0f6fc;
             --text-sub: #8b949e;
             --border-color: #30363d;
@@ -27,7 +28,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', 'Inter', sans-serif;
             scroll-behavior: smooth;
         }
 
@@ -38,6 +39,12 @@
             line-height: 1.7;
         }
 
+        /* Enforce LTR Font for English Titles & Names */
+        .en-font {
+            font-family: 'Inter', sans-serif;
+            direction: ltr;
+        }
+
         /* 1. Header Bar */
         header {
             position: fixed;
@@ -45,7 +52,7 @@
             left: 0;
             right: 0;
             height: var(--header-height);
-            background: rgba(22, 27, 34, 0.9);
+            background: rgba(22, 27, 34, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             display: flex;
@@ -89,11 +96,6 @@
             border-radius: 50%;
             border: 2px solid var(--primary-blue);
             object-fit: cover;
-            transition: transform 0.2s;
-        }
-
-        .profile-thumb:hover {
-            transform: scale(1.08);
         }
 
         .brand-name {
@@ -102,7 +104,7 @@
             color: var(--text-main);
         }
 
-        /* 2. Vertical Sidebar (Gemini Style Drawer) */
+        /* 2. Vertical Sidebar (Gemini Style) */
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -125,7 +127,7 @@
         .sidebar {
             position: fixed;
             top: 0;
-            right: -280px; /* Hidden initially on right side for RTL */
+            right: -280px;
             width: 280px;
             height: 100%;
             background-color: var(--sidebar-bg);
@@ -153,6 +155,9 @@
         .sidebar-title {
             font-weight: 700;
             color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .close-btn {
@@ -183,7 +188,13 @@
         .sidebar-nav li a:hover {
             background-color: rgba(47, 129, 247, 0.1);
             color: var(--hover-blue);
+        }
+
+        .sidebar-nav li a.active {
+            background-color: rgba(47, 129, 247, 0.15);
+            color: var(--hover-blue);
             border-right-color: var(--primary-blue);
+            font-weight: 700;
         }
 
         /* 3. Main Container */
@@ -193,48 +204,111 @@
             padding: 0 20px;
         }
 
-        /* Profile Banner Section */
+        /* 4. HERO HEADER BANNER (تصميم رأس الصفحة الاحترافي المحدث) */
         .hero-banner {
-            background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+            background: linear-gradient(145deg, #161b22 0%, #0d1117 100%);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 40px 20px;
-            text-align: center;
+            padding: 45px 30px;
             margin-bottom: 30px;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-header-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
         }
 
         .hero-profile-img {
-            width: 110px;
-            height: 110px;
+            width: 105px;
+            height: 105px;
             border-radius: 50%;
             border: 3px solid var(--primary-blue);
             object-fit: cover;
-            margin-bottom: 15px;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(47, 129, 247, 0.4);
-            transition: transform 0.3s;
+            box-shadow: 0 0 25px rgba(47, 129, 247, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .hero-profile-img:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(47, 129, 247, 0.6);
+        }
+
+        .hero-text-details {
+            text-align: right;
         }
 
         .hero-banner h1 {
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             font-weight: 900;
             color: var(--text-main);
+            letter-spacing: -0.5px;
+            line-height: 1.2;
         }
 
-        .hero-banner p {
+        .hero-title-sub {
             color: var(--hover-blue);
-            font-size: 1.1rem;
-            margin-top: 5px;
-            font-weight: 600;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-top: 6px;
         }
 
-        /* Professional Cards */
+        .hero-bio-summary {
+            color: var(--text-sub);
+            font-size: 1rem;
+            max-width: 680px;
+            margin: 18px auto 25px auto;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        /* Action Contact Buttons */
+        .hero-contact-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .contact-btn {
+            background-color: var(--btn-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.25s ease;
+        }
+
+        .contact-btn:hover {
+            background-color: var(--btn-hover);
+            border-color: var(--hover-blue);
+            color: var(--hover-blue);
+            transform: translateY(-2px);
+        }
+
+        .contact-btn.primary {
+            background-color: rgba(47, 129, 247, 0.15);
+            border-color: var(--primary-blue);
+            color: var(--hover-blue);
+        }
+
+        .contact-btn.primary:hover {
+            background-color: var(--primary-blue);
+            color: #fff;
+        }
+
+        /* 5. Cards & Content Sections */
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -256,7 +330,7 @@
             gap: 10px;
         }
 
-        /* Professional Skills Section */
+        /* Skills Section */
         .skills-category {
             margin-bottom: 20px;
         }
@@ -282,16 +356,9 @@
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 600;
-            transition: all 0.2s;
         }
 
-        .skill-badge:hover {
-            background-color: var(--primary-blue);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-
-        /* Accordion Custom Styling */
+        /* Accordion Style */
         .accordion-item {
             background-color: #0d1117;
             border: 1px solid var(--border-color);
@@ -313,12 +380,6 @@
             align-items: center;
             cursor: pointer;
             text-align: right;
-            transition: background 0.2s;
-        }
-
-        .accordion-btn:hover {
-            background-color: rgba(255,255,255,0.03);
-            color: var(--hover-blue);
         }
 
         .accordion-btn i.fa-chevron-down {
@@ -346,7 +407,7 @@
             border-top: 1px solid var(--border-color);
         }
 
-        /* Image View Modal (LightBox) */
+        /* Image View Lightbox */
         .modal {
             position: fixed;
             top: 0;
@@ -373,10 +434,8 @@
             max-height: 80vh;
             border-radius: 15px;
             border: 3px solid var(--primary-blue);
-            box-shadow: 0 0 30px rgba(47, 129, 247, 0.5);
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 30px 0;
@@ -385,25 +444,34 @@
             border-top: 1px solid var(--border-color);
             margin-top: 40px;
         }
+
+        @media (max-width: 600px) {
+            .hero-header-wrapper {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text-details {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <!-- Header Bar -->
     <header>
         <div class="header-brand">
             <button class="menu-btn" id="open-sidebar">
                 <i class="fa-solid fa-bars"></i>
             </button>
             <div class="brand-profile" id="header-profile-btn">
-                <!-- استبدل الرابط أدناه برابط صورتك الشخصية المرفوعة -->
-                <img src="https://via.placeholder.com/150/2f81f7/ffffff?text=Wael" alt="Wael Aziz" class="profile-thumb" id="thumb-img">
-                <span class="brand-name">وائل عبدالعزيز</span>
+                <img src="profile.jpg" alt="Wael Abdulaziz" class="profile-thumb" id="thumb-img" onerror="this.src='https://via.placeholder.com/150/2f81f7/ffffff?text=Wael'">
+                <span class="brand-name en-font">Wael Abdulaziz</span>
             </div>
         </div>
     </header>
 
-    <!-- Sidebar Overlay & Vertical Drawer (Gemini Style) -->
+    <!-- Sidebar Overlay & Vertical Navigation -->
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
     
     <aside class="sidebar" id="sidebar">
@@ -414,6 +482,7 @@
             </button>
         </div>
         <ul class="sidebar-nav">
+            <li><a href="#hero" class="nav-item active"><i class="fa-solid fa-house"></i> الصفحة الرئيسية</a></li>
             <li><a href="#about" class="nav-item"><i class="fa-solid fa-user-gear"></i> نبذة عني</a></li>
             <li><a href="#skills" class="nav-item"><i class="fa-solid fa-code"></i> المهارات التقنية</a></li>
             <li><a href="#projects" class="nav-item"><i class="fa-solid fa-layer-group"></i> نماذج الأعمال</a></li>
@@ -421,26 +490,48 @@
         </ul>
     </aside>
 
-    <!-- Main Content -->
+    <!-- Main Container -->
     <div class="container">
 
-        <!-- Hero Section Banner -->
-        <div class="hero-banner">
-            <!-- انقر على الصورة لعرضها بكبر الشاشة -->
-            <img src="https://via.placeholder.com/150/2f81f7/ffffff?text=Wael" alt="وائل عبدالعزيز" class="hero-profile-img" id="hero-img">
-            <h1>وائل عبدالعزيز</h1>
-            <p>Software Engineer & Systems Support Specialist</p>
+        <!-- HERO HEADER BANNER (التصميم الجديد المحدث) -->
+        <div class="hero-banner" id="hero">
+            <div class="hero-header-wrapper">
+                <img src="profile.jpg" alt="Wael Abdulaziz" class="hero-profile-img" id="hero-img" onerror="this.src='https://via.placeholder.com/150/2f81f7/ffffff?text=Wael'">
+                <div class="hero-text-details">
+                    <h1 class="en-font">Wael Abdulaziz</h1>
+                    <div class="hero-title-sub en-font">Software Engineer & Systems Support Specialist</div>
+                </div>
+            </div>
+
+            <p class="hero-bio-summary en-font">
+                Passionate about developing scalable web applications, optimizing databases, and securing IT systems infrastructure.
+            </p>
+
+            <div class="hero-contact-buttons en-font">
+                <a href="mailto:wael@example.com" class="contact-btn primary">
+                    <i class="fa-solid fa-envelope"></i> Email Me
+                </a>
+                <a href="tel:+967777546622" class="contact-btn">
+                    <i class="fa-solid fa-phone"></i> +967 777 546 622
+                </a>
+                <a href="https://github.com/wael-aziiz" target="_blank" class="contact-btn">
+                    <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="contact-btn">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
         </div>
 
-        <!-- 1. نبذة عني المبتكرة -->
+        <!-- 1. نبذة عني -->
         <div class="card" id="about">
             <h2 class="card-title"><i class="fa-solid fa-user-gear"></i> نبذة عني</h2>
-            <p style="color: var(--text-sub); font-size: 1.05rem; leading-height: 1.8;">
-                مهندس برمجيات متخصص في بناء وتطوير تطبيقات الويب الحديثة وحلول الأنظمة المتكاملة. أمتلك خبرة عملية في إدارة وتحسين قواعد البيانات، وفحص وتأمين الأكواد البرمجية، ومعالجة المشكلات الفنية المعقدة في البيئات التشغيلية. يساند شغفي البرمجي تحصيل علمي متقدم في مجال **الأمن السيبراني والشبكات**، مما يتيح لي تقديم حلول برمجية عالية الأداء وآمنة تماماً.
+            <p style="color: var(--text-sub); font-size: 1.05rem;">
+                مهندس برمجيات متخصص في بناء وتطوير تطبيقات الويب الحديثة وحلول الأنظمة المتكاملة. أمتلك خبرة عملية في إدارة وتحسين قواعد البيانات، وفحص وتأمين الأكواد البرمجية، ومعالجة المشكلات الفنية المعقدة في البيئات التشغيلية. يساند شغفي البرمجي تحصيل علمي متقدم في مجال الأمن السيبراني والشبكات، مما يتيح لي تقديم حلول برمجية عالية الأداء وآمنة تماماً.
             </p>
         </div>
 
-        <!-- 2. المهارات التقنية المصنفة احترافياً -->
+        <!-- 2. المهارات التقنية -->
         <div class="card" id="skills">
             <h2 class="card-title"><i class="fa-solid fa-code"></i> المهارات التقنية الاحترافية</h2>
             
@@ -462,23 +553,21 @@
                     <span class="skill-badge">PostgreSQL</span>
                     <span class="skill-badge">SQL Server</span>
                     <span class="skill-badge">Linux Administration</span>
-                    <span class="skill-badge">Windows Server</span>
                 </div>
             </div>
 
             <div class="skills-category">
                 <div class="category-title"><i class="fa-solid fa-shield-halved"></i> الأمن السيبراني والأدوات (Security & Tools)</div>
                 <div class="skills-grid">
-                    <span class="skill-badge">Google Cybersecurity (Coursera)</span>
-                    <span class="skill-badge">Basic Networking (TCP/IP, DNS)</span>
+                    <span class="skill-badge">Google Cybersecurity</span>
+                    <span class="skill-badge">Networking (TCP/IP, DNS)</span>
                     <span class="skill-badge">Git & GitHub</span>
-                    <span class="skill-badge">Jira & Agile Methodologies</span>
-                    <span class="skill-badge">Postman & API Testing</span>
+                    <span class="skill-badge">API Testing</span>
                 </div>
             </div>
         </div>
 
-        <!-- 3. نماذج الأعمال Toggable -->
+        <!-- 3. نماذج الأعمال -->
         <div class="card" id="projects">
             <h2 class="card-title"><i class="fa-solid fa-layer-group"></i> نماذج الأعمال والخدمات</h2>
 
@@ -519,11 +608,11 @@
             
             <div class="accordion-item">
                 <button class="accordion-btn">
-                    <span><i class="fa-solid fa-user-graduate" style="margin-left:8px;"></i> بكالوريوس هندسة البرمجيات</span>
+                    <span><i class="fa-solid fa-user-graduate" style="margin-left:8px;"></i> بكالوريوس تكنولوجيا المعلومات</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    <p>جامعة الحكمة (2018 - 2022)[span_0](start_span)[span_0](end_span). دراسة متخصصة ومكثفة على مدار 4 سنوات تناولت دورة حياة التطبيقات وهندسة البرمجيات وإدارة الشبكات وقواعد البيانات[span_1](start_span)[span_1](end_span).</p>
+                    <p>جامعة الحكمة (2018 - 2022). دراسة متخصصة ومكثفة على مدار 4 سنوات تناولت دورة حياة التطبيقات وهندسة البرمجيات وإدارة الشبكات وقواعد البيانات.</p>
                 </div>
             </div>
 
@@ -533,7 +622,7 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    <p>منصة Coursera (جاري التحصيل العلمي)[span_2](start_span)[span_2](end_span): برنامج متقدم في اكتشاف الثغرات، حماية الشبكات، وإدارة الأزمات السيبرانية[span_3](start_span)[span_3](end_span).</p>
+                    <p>منصة Coursera: برنامج احترافي متقدم يغطي اكتشاف الثغرات، حماية الشبكات، وإدارة الأزمات السيبرانية لتحسين الأمان التشغيلي للتطبيقات.</p>
                 </div>
             </div>
 
@@ -541,7 +630,7 @@
 
         <!-- Footer -->
         <footer>
-            <p>جميع الحقوق محفوظة © 2026 | وائل عبدالعزيز</p>
+            <p class="en-font">© 2026 Wael Abdulaziz. All Rights Reserved.</p>
         </footer>
 
     </div>
@@ -574,9 +663,13 @@
         closeBtn.addEventListener('click', closeSidebar);
         overlay.addEventListener('click', closeSidebar);
 
-        // Close sidebar when clicking any menu item
+        // Active State & Auto Close Navigation
         navItems.forEach(item => {
-            item.addEventListener('click', closeSidebar);
+            item.addEventListener('click', function() {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                closeSidebar();
+            });
         });
 
         // Accordion Interactions
