@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wael Alnehmi | Software Engineer & Systems Support</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary-color: #38bdf8;
+            --accent-color: #818cf8;
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        header h2 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin: 30px 0 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary-color);
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-color);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .card .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        /* Skills Tags */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .skill-tag {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--primary-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        /* Timeline / Experience */
+        .timeline-item {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-item h4 {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .timeline-item .date {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .timeline-item ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .timeline-item ul li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .timeline-item ul li::before {
+            content: "•";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0 20px 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Wael Abdulaziz Alnehmi</h1>
+            <h2>Software Engineer & Systems Support Specialist</h2>
+            <p>Passionate about developing scalable web applications, optimizing databases, and securing IT systems infrastructure.</p>
+            
+            <div class="contact-info">
+                <a href="mailto:waelaziz541154@gmail.com" class="contact-btn">
+                    <i class="fa-solid fa-envelope"></i> Email Me
+                </a>
+                <a href="tel:+967777546622" class="contact-btn">
+                    <i class="fa-solid fa-phone"></i> +967 777 546 622
+                </a>
+                <a href="https://github.com" target="_blank" class="contact-btn">
+                    <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="contact-btn">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
+        </header>
+
+        <!-- Technical Skills -->
+        <h2 class="section-title"><i class="fa-solid fa-code"></i> Technical Skills & Competencies</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Programming & Web Development</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C#</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">HTML5 / CSS3</span>
+                    <span class="skill-tag">SQL</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Databases & Systems</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">SQL Server</span>
+                    <span class="skill-tag">Linux</span>
+                    <span class="skill-tag">Windows Server</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Networking & Cybersecurity</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">Cybersecurity Fundamentals</span>
+                    <span class="skill-tag">TCP/IP & DNS</span>
+                    <span class="skill-tag">Google Cybersecurity Certificate (In Progress)</span>
+                    <span class="skill-tag">Troubleshooting</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Tools & Methodologies</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">Git / GitHub</span>
+                    <span class="skill-tag">Jira</span>
+                    <span class="skill-tag">Postman</span>
+                    <span class="skill-tag">Chrome Dev Tools</span>
+                    <span class="skill-tag">Agile / Scrum</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience -->
+        <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Professional Experience</h2>
+        <div class="card">
+            <div class="timeline-item">
+                <h4>Software & Technical Support Engineer (Freelance)</h4>
+                <div class="date">2021 - Present</div>
+                <ul>
+                    <li>Developed, maintained, and optimized high-performance web applications.</li>
+                    <li>Managed database structures, optimized SQL queries, and improved operational efficiency.</li>
+                    <li>Executed software testing, bug tracking, and resolved technical glitches efficiently.</li>
+                    <li>Delivered technical support and documented software configurations.</li>
+                </ul>
+            </div>
+            <div class="timeline-item" style="margin-bottom: 0;">
+                <h4>Software Developer & IT Support (Freelance)</h4>
+                <div class="date">2019 - 2021</div>
+                <ul>
+                    <li>Built, tested, and deployed features for desktop and web applications.</li>
+                    <li>Reviewed and refactored codebases to enhance maintainability.</li>
+                    <li>Provided helpdesk support and resolved daily system/software issues.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Education & Certifications -->
+        <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Education & Certifications</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Bachelor's Degree in Software Engineering</h3>
+                <p class="subtitle">Al-Hikma University | 2018 - 2022</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Focused on software lifecycle, algorithms, web development, and system administration.</p>
+            </div>
+            <div class="card">
+                <h3>Certifications & Continuous Learning</h3>
+                <div class="skills-container" style="margin-top: 10px;">
+                    <span class="skill-tag" style="border-color: var(--accent-color); color: var(--accent-color);">🎓 Google Cybersecurity Certificate (Coursera - In Progress)</span>
+                    <span class="skill-tag">Web Application Development</span>
+                    <span class="skill-tag">Cybersecurity Fundamentals</span>
+                    <span class="skill-tag">Basic Networking (TCP/IP, DNS)</span>
+                    <span class="skill-tag">UI/UX Development</span>
+                    <span class="skill-tag">Agile & Scrum Fundamentals</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Wael Abdulaziz Alnehmi. Built for GitHub Pages.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
