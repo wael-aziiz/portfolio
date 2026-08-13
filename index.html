@@ -1,347 +1,452 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wael Alnehmi | Software Engineer & Systems Support</title>
+    <title>وائل عبدالعزيز | Wael Abdulaziz - معرض الأعمال البرمجية</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts Arabic (Cairo & Tajawal) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary-color: #38bdf8;
-            --accent-color: #818cf8;
-            --border-color: #334155;
+            --bg-color: #0b132b;
+            --card-bg: #1c2541;
+            --card-accent: #2a385b;
+            --primary-blue: #00b4d8;
+            --hover-blue: #90e0ef;
+            --text-main: #ffffff;
+            --text-sub: #cbd5e1;
+            --nav-height: 70px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 20px;
+            color: var(--text-main);
+            padding-top: var(--nav-height);
+            line-height: 1.7;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* Header Section */
-        header {
-            text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            color: var(--text-color);
-            margin-bottom: 10px;
-        }
-
-        header h2 {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        header p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 20px auto;
-        }
-
-        .contact-info {
+        /* 1. Sticky Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: rgba(11, 19, 43, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
-        .contact-btn {
-            display: inline-flex;
+        .nav-profile {
+            display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            background-color: var(--card-bg);
-            color: var(--text-color);
+            gap: 12px;
             text-decoration: none;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            color: var(--text-main);
         }
 
-        .contact-btn:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-
-        /* Section Titles */
-        .section-title {
-            font-size: 1.5rem;
-            color: var(--text-color);
-            margin: 30px 0 20px 0;
+        .avatar-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-blue);
+            background: #1c2541;
             display: flex;
             align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        .section-title i {
-            color: var(--primary-color);
-        }
-
-        /* Grid Layouts */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary-color);
-        }
-
-        .card h3 {
+            justify-content: center;
             font-size: 1.2rem;
-            color: var(--primary-color);
+            color: var(--primary-blue);
+        }
+
+        .nav-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* 2. Hero Section Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #0077b6 0%, #03045e 100%);
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 35px;
+        }
+
+        .hero-avatar-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #1c2541;
+            border: 3px solid var(--primary-blue);
+            margin: 0 auto 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--hover-blue);
+            box-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
+        }
+
+        .hero-banner h1 {
+            font-size: 2rem;
+            font-weight: 800;
             margin-bottom: 8px;
         }
 
-        .card .subtitle {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 12px;
+        .hero-banner p {
+            color: var(--hover-blue);
+            font-size: 1.05rem;
         }
 
-        /* Skills Tags */
-        .skills-container {
+        /* Cards Layout */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 180, 216, 0.3);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 3. Interactive Accordion Tabs / Buttons */
+        .accordion-item {
+            background-color: var(--card-accent);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .accordion-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 16px 20px;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            text-align: right;
+            transition: background 0.3s ease;
+        }
+
+        .accordion-btn:hover {
+            background: rgba(0, 180, 216, 0.1);
+            color: var(--primary-blue);
+        }
+
+        .accordion-btn i.fa-chevron-down {
+            transition: transform 0.3s ease;
+            color: var(--primary-blue);
+        }
+
+        .accordion-item.active .accordion-btn i.fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 20px;
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            background-color: rgba(11, 19, 43, 0.4);
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 300px;
+            padding: 15px 20px 20px 20px;
+        }
+
+        /* Skills Badges */
+        .skills-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-top: 10px;
         }
 
-        .skill-tag {
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--primary-color);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
-
-        /* Timeline / Experience */
-        .timeline-item {
-            position: relative;
-            padding-left: 20px;
-            border-left: 2px solid var(--border-color);
-            margin-bottom: 25px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -6px;
-            top: 5px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-        }
-
-        .timeline-item h4 {
-            font-size: 1.1rem;
-            color: var(--text-color);
-        }
-
-        .timeline-item .date {
-            font-size: 0.85rem;
-            color: var(--accent-color);
-            margin-bottom: 8px;
-        }
-
-        .timeline-item ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .timeline-item ul li {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 6px;
-            position: relative;
-            padding-left: 15px;
-        }
-
-        .timeline-item ul li::before {
-            content: "•";
-            color: var(--primary-color);
-            position: absolute;
-            left: 0;
+        .skill-badge {
+            background: rgba(0, 180, 216, 0.15);
+            color: var(--hover-blue);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            font-weight: 600;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 40px 0 20px 0;
-            color: var(--text-muted);
+            padding: 30px 0;
+            color: var(--text-sub);
             font-size: 0.85rem;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             margin-top: 40px;
+        }
+
+        /* Responsive Mobile Styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: var(--nav-height);
+                right: 0;
+                left: 0;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                display: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- 1. Navigation Bar (Sticky Header) -->
+    <nav>
+        <a href="#" class="nav-profile">
+            <div class="avatar-img">
+                <i class="fa-solid fa-user-code"></i>
+            </div>
+            <span class="nav-name">وائل العزيزي | Wael Aziz</span>
+        </a>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#about">نبذة عني</a></li>
+            <li><a href="#skills">المهارات التقنية</a></li>
+            <li><a href="#projects">نماذج الأعمال</a></li>
+            <li><a href="#certifications">الشهادات والتعليم</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
-        <!-- Header -->
-        <header>
-            <h1>Wael Abdulaziz Alnehmi</h1>
-            <h2>Software Engineer & Systems Support Specialist</h2>
-            <p>Passionate about developing scalable web applications, optimizing databases, and securing IT systems infrastructure.</p>
+
+        <!-- 2. Hero Section Banner -->
+        <div class="hero-banner">
+            <div class="hero-avatar-large">
+                <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <h1>مرحباً بك في معرض أعمالي البرمجية</h1>
+            <p>مهندس برمجيات ومطور ويب متخصص في إيجاد الحلول البرمجية الذكية والأمن السيبراني</p>
+        </div>
+
+        <!-- 3. نبذة عني -->
+        <div class="card" id="about">
+            <h2 class="card-title"><i class="fa-solid fa-user-gear"></i> نبذة عني</h2>
+            <p style="color: var(--text-sub);">
+                أعمل على تطوير وتصميم المواقع والتطبيقات الإلكترونية مع التركيز على كتابة كود برمجي آمن، ومريح للمستخدم. أهتم بتحويل الأفكار إلى تطبيقات ويب فعلية تعمل بكفاءة عالية، مع شغف متواصل في مجال أمن المعلومات والشبكات.
+            </p>
+        </div>
+
+        <!-- 4. المهارات التقنية -->
+        <div class="card" id="skills">
+            <h2 class="card-title"><i class="fa-solid fa-code"></i> المهارات التقنية</h2>
+            <div class="skills-grid">
+                <span class="skill-badge">HTML5 / CSS3</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">PHP</span>
+                <span class="skill-badge">C#</span>
+                <span class="skill-badge">SQL Databases</span>
+                <span class="skill-badge">Linux</span>
+                <span class="skill-badge">Git & GitHub</span>
+                <span class="skill-badge">Networking (TCP/IP)</span>
+                <span class="skill-badge">Cybersecurity Fundamentals</span>
+            </div>
+        </div>
+
+        <!-- 5. نماذج الأعمال (Interactive Accordion Buttons) -->
+        <div class="card" id="projects">
+            <h2 class="card-title"><i class="fa-solid fa-layer-group"></i> نماذج الأعمال والخدمات</h2>
+            <p style="color: var(--text-sub); margin-bottom: 15px;">اضغط على أي خدمة لاستعراض التفاصيل البرمجية:</p>
+
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span><i class="fa-solid fa-desktop" style="margin-left:8px;"></i> تصميم واجهات المستخدم (UI/UX)</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>بناء واجهات ويب متجاوبة وجذابة تعمل بكفاءة عالية على جميع الشاشات والهواتف الذكية مع مراعاة تجربة المستخدم السلسة وسرعة التحميل.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span><i class="fa-solid fa-database" style="margin-left:8px;"></i> إدارة وقواعد البيانات</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>تصميم وبناء قواعد البيانات (MySQL, PostgreSQL, SQL Server)، وتحسين كفاءة استعلامات SQL لتسريع استجابة الأنظمة وتنظيم البيانات بمهارة.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span><i class="fa-solid fa-server" style="margin-left:8px;"></i> تطوير الأنظمة الخلفية (Backend)</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>بناء المنطق البرمجي، الربط مع الـ APIs اللازمة لتشغيل تطبيقات الويب، وفحص الثغرات البرمجية وحماية البيانات بشكل متقدم.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span><i class="fa-solid fa-shield-halved" style="margin-left:8px;"></i> الدعم الفني والأمن السيبراني</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>فحص الأعطال البرمجية والشبكية، تقديم استشارات أمنية لتأمين المواقع والأنظمة، وضبط إعدادات الخوادم على أنظمة Linux وWindows.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 6. التعليم والشهادات -->
+        <div class="card" id="certifications">
+            <h2 class="card-title"><i class="fa-solid fa-graduation-cap"></i> التعليم والشهادات</h2>
             
-            <div class="contact-info">
-                <a href="mailto:waelaziz541154@gmail.com" class="contact-btn">
-                    <i class="fa-solid fa-envelope"></i> Email Me
-                </a>
-                <a href="tel:+967777546622" class="contact-btn">
-                    <i class="fa-solid fa-phone"></i> +967 777 546 622
-                </a>
-                <a href="https://github.com" target="_blank" class="contact-btn">
-                    <i class="fa-brands fa-github"></i> GitHub
-                </a>
-                <a href="https://linkedin.com" target="_blank" class="contact-btn">
-                    <i class="fa-brands fa-linkedin"></i> LinkedIn
-                </a>
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span><i class="fa-solid fa-user-graduate" style="margin-left:8px;"></i> بكالوريوس هندسة البرمجيات</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>جامعة الحكمة (2018 - 2022)[span_0](start_span)[span_0](end_span). دراسة متخصصة في دورة حياة تطوير البرمجيات، الخوارزميات، إدارة قواعد البيانات، وهندسة المواقع[span_1](start_span)[span_1](end_span).</p>
+                </div>
             </div>
-        </header>
 
-        <!-- Technical Skills -->
-        <h2 class="section-title"><i class="fa-solid fa-code"></i> Technical Skills & Competencies</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Programming & Web Development</h3>
-                <div class="skills-container">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">C#</span>
-                    <span class="skill-tag">PHP</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">HTML5 / CSS3</span>
-                    <span class="skill-tag">SQL</span>
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span><i class="fa-solid fa-certificate" style="margin-left:8px;"></i> شهادة Google في الأمن السيبراني (Coursera)</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="accordion-content">
+                    <p>جاري التحصيل والأخذ لمسار Google Cybersecurity Professional Certificate المتقدم لتعزيز مهارات حماية الشبكات والأنظمة[span_2](start_span)[span_2](end_span).</p>
                 </div>
             </div>
-            <div class="card">
-                <h3>Databases & Systems</h3>
-                <div class="skills-container">
-                    <span class="skill-tag">MySQL</span>
-                    <span class="skill-tag">PostgreSQL</span>
-                    <span class="skill-tag">SQL Server</span>
-                    <span class="skill-tag">Linux</span>
-                    <span class="skill-tag">Windows Server</span>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Networking & Cybersecurity</h3>
-                <div class="skills-container">
-                    <span class="skill-tag">Cybersecurity Fundamentals</span>
-                    <span class="skill-tag">TCP/IP & DNS</span>
-                    <span class="skill-tag">Google Cybersecurity Certificate (In Progress)</span>
-                    <span class="skill-tag">Troubleshooting</span>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Tools & Methodologies</h3>
-                <div class="skills-container">
-                    <span class="skill-tag">Git / GitHub</span>
-                    <span class="skill-tag">Jira</span>
-                    <span class="skill-tag">Postman</span>
-                    <span class="skill-tag">Chrome Dev Tools</span>
-                    <span class="skill-tag">Agile / Scrum</span>
-                </div>
-            </div>
-        </div>
 
-        <!-- Experience -->
-        <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Professional Experience</h2>
-        <div class="card">
-            <div class="timeline-item">
-                <h4>Software & Technical Support Engineer (Freelance)</h4>
-                <div class="date">2021 - Present</div>
-                <ul>
-                    <li>Developed, maintained, and optimized high-performance web applications.</li>
-                    <li>Managed database structures, optimized SQL queries, and improved operational efficiency.</li>
-                    <li>Executed software testing, bug tracking, and resolved technical glitches efficiently.</li>
-                    <li>Delivered technical support and documented software configurations.</li>
-                </ul>
-            </div>
-            <div class="timeline-item" style="margin-bottom: 0;">
-                <h4>Software Developer & IT Support (Freelance)</h4>
-                <div class="date">2019 - 2021</div>
-                <ul>
-                    <li>Built, tested, and deployed features for desktop and web applications.</li>
-                    <li>Reviewed and refactored codebases to enhance maintainability.</li>
-                    <li>Provided helpdesk support and resolved daily system/software issues.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Education & Certifications -->
-        <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Education & Certifications</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Bachelor's Degree in Software Engineering</h3>
-                <p class="subtitle">Al-Hikma University | 2018 - 2022</p>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Focused on software lifecycle, algorithms, web development, and system administration.</p>
-            </div>
-            <div class="card">
-                <h3>Certifications & Continuous Learning</h3>
-                <div class="skills-container" style="margin-top: 10px;">
-                    <span class="skill-tag" style="border-color: var(--accent-color); color: var(--accent-color);">🎓 Google Cybersecurity Certificate (Coursera - In Progress)</span>
-                    <span class="skill-tag">Web Application Development</span>
-                    <span class="skill-tag">Cybersecurity Fundamentals</span>
-                    <span class="skill-tag">Basic Networking (TCP/IP, DNS)</span>
-                    <span class="skill-tag">UI/UX Development</span>
-                    <span class="skill-tag">Agile & Scrum Fundamentals</span>
-                </div>
-            </div>
         </div>
 
         <!-- Footer -->
         <footer>
-            <p>&copy; 2026 Wael Abdulaziz Alnehmi. Built for GitHub Pages.</p>
+            <p>جميع الحقوق محفوظة © 2026 | تم التصميم والاستضافة بواسطة GitHub Pages</p>
         </footer>
+
     </div>
 
+    <!-- JavaScript for Dynamic Interactions -->
+    <script>
+        // Toggle Accordion Tabs
+        const accordionBtns = document.querySelectorAll('.accordion-btn');
+
+        accordionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                
+                // Close other items if open
+                document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+
+                item.classList.toggle('active');
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
