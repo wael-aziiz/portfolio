@@ -6,19 +6,21 @@
     <title>وائل عبدالعزيز | Wael Abdulaziz - معرض الأعمال البرمجية</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Arabic (Cairo & Tajawal) -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts Arabic (Cairo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #0b132b;
-            --card-bg: #1c2541;
-            --card-accent: #2a385b;
-            --primary-blue: #00b4d8;
-            --hover-blue: #90e0ef;
-            --text-main: #ffffff;
-            --text-sub: #cbd5e1;
-            --nav-height: 70px;
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --sidebar-bg: #161b22;
+            --primary-blue: #2f81f7;
+            --hover-blue: #58a6ff;
+            --accent-purple: #8957e5;
+            --text-main: #f0f6fc;
+            --text-sub: #8b949e;
+            --border-color: #30363d;
+            --header-height: 65px;
         }
 
         * {
@@ -32,162 +34,277 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding-top: var(--nav-height);
+            padding-top: var(--header-height);
             line-height: 1.7;
         }
 
-        /* 1. Sticky Navigation Bar */
-        nav {
+        /* 1. Header Bar */
+        header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: var(--nav-height);
-            background: rgba(11, 19, 43, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            height: var(--header-height);
+            background: rgba(22, 27, 34, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 5%;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            padding: 0 20px;
+            z-index: 999;
         }
 
-        .nav-profile {
+        .header-brand {
             display: flex;
             align-items: center;
             gap: 12px;
-            text-decoration: none;
-            color: var(--text-main);
         }
 
-        .avatar-img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid var(--primary-blue);
-            background: #1c2541;
+        .menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .menu-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        .brand-profile {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--primary-blue);
-        }
-
-        .nav-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-sub);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-blue);
-        }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            color: var(--text-main);
+            gap: 10px;
             cursor: pointer;
         }
 
-        /* Container */
+        .profile-thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-blue);
+            object-fit: cover;
+            transition: transform 0.2s;
+        }
+
+        .profile-thumb:hover {
+            transform: scale(1.08);
+        }
+
+        .brand-name {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        /* 2. Vertical Sidebar (Gemini Style Drawer) */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -280px; /* Hidden initially on right side for RTL */
+            width: 280px;
+            height: 100%;
+            background-color: var(--sidebar-bg);
+            border-left: 1px solid var(--border-color);
+            z-index: 1001;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px 20px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-title {
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-sub);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .sidebar-nav li a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 25px;
+            color: var(--text-sub);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            border-right: 3px solid transparent;
+        }
+
+        .sidebar-nav li a:hover {
+            background-color: rgba(47, 129, 247, 0.1);
+            color: var(--hover-blue);
+            border-right-color: var(--primary-blue);
+        }
+
+        /* 3. Main Container */
         .container {
             max-width: 900px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
-        /* 2. Hero Section Banner */
+        /* Profile Banner Section */
         .hero-banner {
-            background: linear-gradient(135deg, #0077b6 0%, #03045e 100%);
+            background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 40px 20px;
             text-align: center;
+            margin-bottom: 30px;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .hero-avatar-large {
-            width: 100px;
-            height: 100px;
+        .hero-profile-img {
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            background-color: #1c2541;
             border: 3px solid var(--primary-blue);
-            margin: 0 auto 15px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: var(--hover-blue);
-            box-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
+            object-fit: cover;
+            margin-bottom: 15px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(47, 129, 247, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .hero-profile-img:hover {
+            transform: scale(1.05);
         }
 
         .hero-banner h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 8px;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--text-main);
         }
 
         .hero-banner p {
             color: var(--hover-blue);
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+            margin-top: 5px;
+            font-weight: 600;
         }
 
-        /* Cards Layout */
+        /* Professional Cards */
         .card {
             background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 25px;
             margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
         .card-title {
             font-size: 1.3rem;
             color: var(--primary-blue);
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 15px;
-            border-bottom: 2px solid rgba(0, 180, 216, 0.3);
             padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        /* 3. Interactive Accordion Tabs / Buttons */
+        /* Professional Skills Section */
+        .skills-category {
+            margin-bottom: 20px;
+        }
+
+        .category-title {
+            font-size: 1rem;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-badge {
+            background-color: rgba(47, 129, 247, 0.1);
+            color: var(--hover-blue);
+            border: 1px solid rgba(47, 129, 247, 0.25);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .skill-badge:hover {
+            background-color: var(--primary-blue);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Accordion Custom Styling */
         .accordion-item {
-            background-color: var(--card-accent);
+            background-color: #0d1117;
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             margin-bottom: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
         }
 
         .accordion-btn {
             width: 100%;
             background: none;
             border: none;
-            padding: 16px 20px;
+            padding: 18px 20px;
             color: var(--text-main);
             font-size: 1.05rem;
             font-weight: 700;
@@ -196,17 +313,17 @@
             align-items: center;
             cursor: pointer;
             text-align: right;
-            transition: background 0.3s ease;
+            transition: background 0.2s;
         }
 
         .accordion-btn:hover {
-            background: rgba(0, 180, 216, 0.1);
-            color: var(--primary-blue);
+            background-color: rgba(255,255,255,0.03);
+            color: var(--hover-blue);
         }
 
         .accordion-btn i.fa-chevron-down {
-            transition: transform 0.3s ease;
             color: var(--primary-blue);
+            transition: transform 0.3s ease;
         }
 
         .accordion-item.active .accordion-btn i.fa-chevron-down {
@@ -216,34 +333,47 @@
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.4s ease;
+            transition: max-height 0.3s ease, padding 0.3s ease;
             padding: 0 20px;
             color: var(--text-sub);
             font-size: 0.95rem;
-            background-color: rgba(11, 19, 43, 0.4);
+            background-color: rgba(0, 0, 0, 0.2);
         }
 
         .accordion-item.active .accordion-content {
             max-height: 300px;
             padding: 15px 20px 20px 20px;
+            border-top: 1px solid var(--border-color);
         }
 
-        /* Skills Badges */
-        .skills-grid {
+        /* Image View Modal (LightBox) */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 2000;
         }
 
-        .skill-badge {
-            background: rgba(0, 180, 216, 0.15);
-            color: var(--hover-blue);
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(0, 180, 216, 0.3);
-            font-weight: 600;
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 15px;
+            border: 3px solid var(--primary-blue);
+            box-shadow: 0 0 30px rgba(47, 129, 247, 0.5);
         }
 
         /* Footer */
@@ -252,142 +382,138 @@
             padding: 30px 0;
             color: var(--text-sub);
             font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid var(--border-color);
             margin-top: 40px;
-        }
-
-        /* Responsive Mobile Styles */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                position: absolute;
-                top: var(--nav-height);
-                right: 0;
-                left: 0;
-                background-color: var(--bg-color);
-                flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-                display: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. Navigation Bar (Sticky Header) -->
-    <nav>
-        <a href="#" class="nav-profile">
-            <div class="avatar-img">
-                <i class="fa-solid fa-user-code"></i>
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-brand">
+            <button class="menu-btn" id="open-sidebar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="brand-profile" id="header-profile-btn">
+                <!-- استبدل الرابط أدناه برابط صورتك الشخصية المرفوعة -->
+                <img src="https://via.placeholder.com/150/2f81f7/ffffff?text=Wael" alt="Wael Aziz" class="profile-thumb" id="thumb-img">
+                <span class="brand-name">وائل عبدالعزيز</span>
             </div>
-            <span class="nav-name">وائل العزيزي | Wael Aziz</span>
-        </a>
-
-        <div class="menu-toggle" id="mobile-menu">
-            <i class="fa-solid fa-bars"></i>
         </div>
+    </header>
 
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#about">نبذة عني</a></li>
-            <li><a href="#skills">المهارات التقنية</a></li>
-            <li><a href="#projects">نماذج الأعمال</a></li>
-            <li><a href="#certifications">الشهادات والتعليم</a></li>
+    <!-- Sidebar Overlay & Vertical Drawer (Gemini Style) -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-title"><i class="fa-solid fa-compass"></i> القائمة الرئيسية</span>
+            <button class="close-btn" id="close-sidebar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="#about" class="nav-item"><i class="fa-solid fa-user-gear"></i> نبذة عني</a></li>
+            <li><a href="#skills" class="nav-item"><i class="fa-solid fa-code"></i> المهارات التقنية</a></li>
+            <li><a href="#projects" class="nav-item"><i class="fa-solid fa-layer-group"></i> نماذج الأعمال</a></li>
+            <li><a href="#certifications" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> الشهادات والتعليم</a></li>
         </ul>
-    </nav>
+    </aside>
 
+    <!-- Main Content -->
     <div class="container">
 
-        <!-- 2. Hero Section Banner -->
+        <!-- Hero Section Banner -->
         <div class="hero-banner">
-            <div class="hero-avatar-large">
-                <i class="fa-solid fa-laptop-code"></i>
-            </div>
-            <h1>مرحباً بك في معرض أعمالي البرمجية</h1>
-            <p>مهندس برمجيات ومطور ويب متخصص في إيجاد الحلول البرمجية الذكية والأمن السيبراني</p>
+            <!-- انقر على الصورة لعرضها بكبر الشاشة -->
+            <img src="https://via.placeholder.com/150/2f81f7/ffffff?text=Wael" alt="وائل عبدالعزيز" class="hero-profile-img" id="hero-img">
+            <h1>وائل عبدالعزيز</h1>
+            <p>Software Engineer & Systems Support Specialist</p>
         </div>
 
-        <!-- 3. نبذة عني -->
+        <!-- 1. نبذة عني المبتكرة -->
         <div class="card" id="about">
             <h2 class="card-title"><i class="fa-solid fa-user-gear"></i> نبذة عني</h2>
-            <p style="color: var(--text-sub);">
-                أعمل على تطوير وتصميم المواقع والتطبيقات الإلكترونية مع التركيز على كتابة كود برمجي آمن، ومريح للمستخدم. أهتم بتحويل الأفكار إلى تطبيقات ويب فعلية تعمل بكفاءة عالية، مع شغف متواصل في مجال أمن المعلومات والشبكات.
+            <p style="color: var(--text-sub); font-size: 1.05rem; leading-height: 1.8;">
+                مهندس برمجيات متخصص في بناء وتطوير تطبيقات الويب الحديثة وحلول الأنظمة المتكاملة. أمتلك خبرة عملية في إدارة وتحسين قواعد البيانات، وفحص وتأمين الأكواد البرمجية، ومعالجة المشكلات الفنية المعقدة في البيئات التشغيلية. يساند شغفي البرمجي تحصيل علمي متقدم في مجال **الأمن السيبراني والشبكات**، مما يتيح لي تقديم حلول برمجية عالية الأداء وآمنة تماماً.
             </p>
         </div>
 
-        <!-- 4. المهارات التقنية -->
+        <!-- 2. المهارات التقنية المصنفة احترافياً -->
         <div class="card" id="skills">
-            <h2 class="card-title"><i class="fa-solid fa-code"></i> المهارات التقنية</h2>
-            <div class="skills-grid">
-                <span class="skill-badge">HTML5 / CSS3</span>
-                <span class="skill-badge">JavaScript</span>
-                <span class="skill-badge">Python</span>
-                <span class="skill-badge">PHP</span>
-                <span class="skill-badge">C#</span>
-                <span class="skill-badge">SQL Databases</span>
-                <span class="skill-badge">Linux</span>
-                <span class="skill-badge">Git & GitHub</span>
-                <span class="skill-badge">Networking (TCP/IP)</span>
-                <span class="skill-badge">Cybersecurity Fundamentals</span>
+            <h2 class="card-title"><i class="fa-solid fa-code"></i> المهارات التقنية الاحترافية</h2>
+            
+            <div class="skills-category">
+                <div class="category-title"><i class="fa-solid fa-laptop-code"></i> تطوير الويب ولغات البرمجة (Web & Languages)</div>
+                <div class="skills-grid">
+                    <span class="skill-badge">Python</span>
+                    <span class="skill-badge">JavaScript</span>
+                    <span class="skill-badge">PHP</span>
+                    <span class="skill-badge">C#</span>
+                    <span class="skill-badge">HTML5 / CSS3</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <div class="category-title"><i class="fa-solid fa-database"></i> قواعد البيانات والأنظمة (Databases & Systems)</div>
+                <div class="skills-grid">
+                    <span class="skill-badge">MySQL</span>
+                    <span class="skill-badge">PostgreSQL</span>
+                    <span class="skill-badge">SQL Server</span>
+                    <span class="skill-badge">Linux Administration</span>
+                    <span class="skill-badge">Windows Server</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <div class="category-title"><i class="fa-solid fa-shield-halved"></i> الأمن السيبراني والأدوات (Security & Tools)</div>
+                <div class="skills-grid">
+                    <span class="skill-badge">Google Cybersecurity (Coursera)</span>
+                    <span class="skill-badge">Basic Networking (TCP/IP, DNS)</span>
+                    <span class="skill-badge">Git & GitHub</span>
+                    <span class="skill-badge">Jira & Agile Methodologies</span>
+                    <span class="skill-badge">Postman & API Testing</span>
+                </div>
             </div>
         </div>
 
-        <!-- 5. نماذج الأعمال (Interactive Accordion Buttons) -->
+        <!-- 3. نماذج الأعمال Toggable -->
         <div class="card" id="projects">
             <h2 class="card-title"><i class="fa-solid fa-layer-group"></i> نماذج الأعمال والخدمات</h2>
-            <p style="color: var(--text-sub); margin-bottom: 15px;">اضغط على أي خدمة لاستعراض التفاصيل البرمجية:</p>
 
             <div class="accordion-item">
                 <button class="accordion-btn">
-                    <span><i class="fa-solid fa-desktop" style="margin-left:8px;"></i> تصميم واجهات المستخدم (UI/UX)</span>
+                    <span><i class="fa-solid fa-desktop" style="margin-left:8px;"></i> تصميم وتطوير الواجهات (Frontend Development)</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    <p>بناء واجهات ويب متجاوبة وجذابة تعمل بكفاءة عالية على جميع الشاشات والهواتف الذكية مع مراعاة تجربة المستخدم السلسة وسرعة التحميل.</p>
+                    <p>تطوير واجهات مستخدم تفاعلية وجذابة تناسب جميع مقاسات الشاشات والهواتف، مع تحسين سرعة الأداء واستجابة الصفحة لضمان أفضل تجربة مستخدم.</p>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <button class="accordion-btn">
-                    <span><i class="fa-solid fa-database" style="margin-left:8px;"></i> إدارة وقواعد البيانات</span>
+                    <span><i class="fa-solid fa-server" style="margin-left:8px;"></i> بناء الأنظمة الخلفية وربط APIs</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    <p>تصميم وبناء قواعد البيانات (MySQL, PostgreSQL, SQL Server)، وتحسين كفاءة استعلامات SQL لتسريع استجابة الأنظمة وتنظيم البيانات بمهارة.</p>
+                    <p>برمجة قواعد العمل (Backend Logic)، وتصميم وبناء برمجيات الربط APIs بكفاءة واستقرار، مع مراعاة المعايير البرمجية الآمنة لضمان استقرار النظام.</p>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <button class="accordion-btn">
-                    <span><i class="fa-solid fa-server" style="margin-left:8px;"></i> تطوير الأنظمة الخلفية (Backend)</span>
+                    <span><i class="fa-solid fa-database" style="margin-left:8px;"></i> إدارة وتأمين قواعد البيانات</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    <p>بناء المنطق البرمجي، الربط مع الـ APIs اللازمة لتشغيل تطبيقات الويب، وفحص الثغرات البرمجية وحماية البيانات بشكل متقدم.</p>
+                    <p>هيكلة وتنظيم بيانات المشاريع، وتصميم استعلامات SQL معقدة وسريعة، وإصلاح مشكلات بطء الاستجابة لبيانات الحجم الكبير.</p>
                 </div>
             </div>
-
-            <div class="accordion-item">
-                <button class="accordion-btn">
-                    <span><i class="fa-solid fa-shield-halved" style="margin-left:8px;"></i> الدعم الفني والأمن السيبراني</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </button>
-                <div class="accordion-content">
-                    <p>فحص الأعطال البرمجية والشبكية، تقديم استشارات أمنية لتأمين المواقع والأنظمة، وضبط إعدادات الخوادم على أنظمة Linux وWindows.</p>
-                </div>
-            </div>
-
         </div>
 
-        <!-- 6. التعليم والشهادات -->
+        <!-- 4. الشهادات والتعليم -->
         <div class="card" id="certifications">
             <h2 class="card-title"><i class="fa-solid fa-graduation-cap"></i> التعليم والشهادات</h2>
             
@@ -397,17 +523,17 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    <p>جامعة الحكمة (2018 - 2022)[span_0](start_span)[span_0](end_span). دراسة متخصصة في دورة حياة تطوير البرمجيات، الخوارزميات، إدارة قواعد البيانات، وهندسة المواقع[span_1](start_span)[span_1](end_span).</p>
+                    <p>جامعة الحكمة (2018 - 2022)[span_0](start_span)[span_0](end_span). دراسة متخصصة ومكثفة على مدار 4 سنوات تناولت دورة حياة التطبيقات وهندسة البرمجيات وإدارة الشبكات وقواعد البيانات[span_1](start_span)[span_1](end_span).</p>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <button class="accordion-btn">
-                    <span><i class="fa-solid fa-certificate" style="margin-left:8px;"></i> شهادة Google في الأمن السيبراني (Coursera)</span>
+                    <span><i class="fa-solid fa-certificate" style="margin-left:8px;"></i> شهادة Google الاحترافية للأمن السيبراني</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    <p>جاري التحصيل والأخذ لمسار Google Cybersecurity Professional Certificate المتقدم لتعزيز مهارات حماية الشبكات والأنظمة[span_2](start_span)[span_2](end_span).</p>
+                    <p>منصة Coursera (جاري التحصيل العلمي)[span_2](start_span)[span_2](end_span): برنامج متقدم في اكتشاف الثغرات، حماية الشبكات، وإدارة الأزمات السيبرانية[span_3](start_span)[span_3](end_span).</p>
                 </div>
             </div>
 
@@ -415,37 +541,72 @@
 
         <!-- Footer -->
         <footer>
-            <p>جميع الحقوق محفوظة © 2026 | تم التصميم والاستضافة بواسطة GitHub Pages</p>
+            <p>جميع الحقوق محفوظة © 2026 | وائل عبدالعزيز</p>
         </footer>
 
     </div>
 
-    <!-- JavaScript for Dynamic Interactions -->
-    <script>
-        // Toggle Accordion Tabs
-        const accordionBtns = document.querySelectorAll('.accordion-btn');
+    <!-- Image Lightbox Modal -->
+    <div class="modal" id="image-modal">
+        <img src="" alt="Profile Picture" class="modal-img" id="modal-img-src">
+    </div>
 
+    <!-- JavaScript Actions -->
+    <script>
+        // Sidebar Controls
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const openBtn = document.getElementById('open-sidebar');
+        const closeBtn = document.getElementById('close-sidebar');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        function openSidebar() {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        openBtn.addEventListener('click', openSidebar);
+        closeBtn.addEventListener('click', closeSidebar);
+        overlay.addEventListener('click', closeSidebar);
+
+        // Close sidebar when clicking any menu item
+        navItems.forEach(item => {
+            item.addEventListener('click', closeSidebar);
+        });
+
+        // Accordion Interactions
+        const accordionBtns = document.querySelectorAll('.accordion-btn');
         accordionBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const item = btn.parentElement;
-                
-                // Close other items if open
-                document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
+                document.querySelectorAll('.accordion-item').forEach(other => {
+                    if (other !== item) other.classList.remove('active');
                 });
-
                 item.classList.toggle('active');
             });
         });
 
-        // Mobile Menu Toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
+        // Profile Image Modal (View Picture)
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img-src');
+        const thumbImg = document.getElementById('thumb-img');
+        const heroImg = document.getElementById('hero-img');
 
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        function showImageModal(src) {
+            modalImg.src = src;
+            modal.classList.add('active');
+        }
+
+        thumbImg.addEventListener('click', () => showImageModal(thumbImg.src));
+        heroImg.addEventListener('click', () => showImageModal(heroImg.src));
+
+        modal.addEventListener('click', () => {
+            modal.classList.remove('active');
         });
     </script>
 </body>
