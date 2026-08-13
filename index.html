@@ -11,16 +11,17 @@
     
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
+            --bg-color: #0b0f17;
+            --card-bg: rgba(22, 27, 34, 0.75);
             --sidebar-bg: #161b22;
-            --primary-blue: #2f81f7;
-            --hover-blue: #58a6ff;
-            --btn-bg: #21262d;
-            --btn-hover: #30363d;
-            --text-main: #f0f6fc;
-            --text-sub: #8b949e;
-            --border-color: #30363d;
+            --primary-blue: #3b82f6;
+            --purple-accent: #8b5cf6;
+            --hover-blue: #60a5fa;
+            --btn-bg: rgba(255, 255, 255, 0.05);
+            --btn-hover: rgba(59, 130, 246, 0.2);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8; /* تم زيادة التباين للوضوح */
+            --border-color: rgba(255, 255, 255, 0.1);
             --header-height: 65px;
         }
 
@@ -36,29 +37,76 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             padding-top: var(--header-height);
-            line-height: 1.7;
+            line-height: 1.8;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Enforce LTR Font for English Titles & Names */
+        /* 5. Background Tech Grid Accent & Color Blobs */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .bg-blob-1 {
+            position: fixed;
+            top: 10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bg-blob-2 {
+            position: fixed;
+            bottom: 20%;
+            right: -10%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
         .en-font {
             font-family: 'Inter', sans-serif;
             direction: ltr;
         }
 
-        /* 1. Header Bar */
+        /* Gradient Text Styling */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-blue), var(--purple-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Header Bar */
         header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             height: var(--header-height);
-            background: rgba(22, 27, 34, 0.95);
-            backdrop-filter: blur(12px);
+            background: rgba(11, 15, 23, 0.85);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 25px;
             z-index: 999;
         }
 
@@ -80,7 +128,7 @@
         }
 
         .menu-btn:hover {
-            background-color: var(--border-color);
+            background-color: var(--btn-bg);
         }
 
         .brand-profile {
@@ -104,15 +152,15 @@
             color: var(--text-main);
         }
 
-        /* 2. Vertical Sidebar (Gemini Style) */
+        /* Vertical Navigation Drawer */
         .sidebar-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
@@ -185,33 +233,33 @@
             border-right: 3px solid transparent;
         }
 
-        .sidebar-nav li a:hover {
-            background-color: rgba(47, 129, 247, 0.1);
-            color: var(--hover-blue);
-        }
-
-        .sidebar-nav li a.active {
-            background-color: rgba(47, 129, 247, 0.15);
+        .sidebar-nav li a:hover, .sidebar-nav li a.active {
+            background-color: rgba(59, 130, 246, 0.15);
             color: var(--hover-blue);
             border-right-color: var(--primary-blue);
-            font-weight: 700;
         }
 
-        /* 3. Main Container */
+        /* Main Container */
         .container {
-            max-width: 900px;
+            max-width: 920px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
-        /* 4. HERO HEADER BANNER (تصميم رأس الصفحة الاحترافي المحدث) */
+        /* Hero Banner with Glassmorphism */
         .hero-banner {
-            background: linear-gradient(145deg, #161b22 0%, #0d1117 100%);
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 45px 30px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .hero-banner:hover {
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
         .hero-header-wrapper {
@@ -224,19 +272,18 @@
         }
 
         .hero-profile-img {
-            width: 105px;
-            height: 105px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             border: 3px solid var(--primary-blue);
             object-fit: cover;
             cursor: pointer;
-            box-shadow: 0 0 25px rgba(47, 129, 247, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+            transition: transform 0.3s ease;
         }
 
         .hero-profile-img:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 35px rgba(47, 129, 247, 0.6);
         }
 
         .hero-text-details {
@@ -244,30 +291,57 @@
         }
 
         .hero-banner h1 {
-            font-size: 2.3rem;
+            font-size: 2.4rem;
             font-weight: 900;
-            color: var(--text-main);
             letter-spacing: -0.5px;
             line-height: 1.2;
         }
 
         .hero-title-sub {
-            color: var(--hover-blue);
             font-size: 1.15rem;
             font-weight: 700;
             margin-top: 6px;
         }
 
-        .hero-bio-summary {
-            color: var(--text-sub);
-            font-size: 1rem;
-            max-width: 680px;
-            margin: 18px auto 25px auto;
-            text-align: center;
-            line-height: 1.7;
+        /* 6. Availability Badge */
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-top: 10px;
         }
 
-        /* Action Contact Buttons */
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .hero-bio-summary {
+            color: var(--text-sub);
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin: 20px auto 25px auto;
+            text-align: center;
+        }
+
+        /* Buttons */
         .hero-contact-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -279,7 +353,7 @@
             background-color: var(--btn-bg);
             color: var(--text-main);
             border: 1px solid var(--border-color);
-            padding: 10px 20px;
+            padding: 10px 22px;
             border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
@@ -288,90 +362,128 @@
             align-items: center;
             gap: 10px;
             transition: all 0.25s ease;
+            backdrop-filter: blur(8px);
         }
 
         .contact-btn:hover {
             background-color: var(--btn-hover);
-            border-color: var(--hover-blue);
+            border-color: var(--primary-blue);
             color: var(--hover-blue);
             transform: translateY(-2px);
         }
 
         .contact-btn.primary {
-            background-color: rgba(47, 129, 247, 0.15);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
             border-color: var(--primary-blue);
-            color: var(--hover-blue);
+            color: var(--text-main);
         }
 
         .contact-btn.primary:hover {
-            background-color: var(--primary-blue);
+            background: linear-gradient(135deg, var(--primary-blue), var(--purple-accent));
             color: #fff;
         }
 
-        /* 5. Cards & Content Sections */
+        /* 4. Cards & Hover Effects */
         .card {
             background-color: var(--card-bg);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 25px;
+            border-radius: 20px;
+            padding: 30px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .card-title {
-            font-size: 1.3rem;
-            color: var(--primary-blue);
+            font-size: 1.35rem;
             font-weight: 800;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        /* Skills Section */
+        /* 3. Glassmorphism Skills Badges with Icons */
         .skills-category {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         .category-title {
             font-size: 1rem;
             color: var(--text-sub);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .skills-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
         .skill-badge {
-            background-color: rgba(47, 129, 247, 0.1);
-            color: var(--hover-blue);
-            border: 1px solid rgba(47, 129, 247, 0.25);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 9px 18px;
+            border-radius: 14px;
+            font-size: 0.92rem;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.25s ease;
         }
 
-        /* Accordion Style */
+        .skill-badge i {
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            transition: color 0.25s;
+        }
+
+        .skill-badge:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: var(--primary-blue);
+            color: var(--hover-blue);
+            transform: translateY(-2px);
+        }
+
+        .skill-badge:hover i {
+            color: var(--purple-accent);
+        }
+
+        /* 4. Enhanced Accordion Spacing & Padding */
         .accordion-item {
-            background-color: #0d1117;
+            background-color: rgba(11, 15, 23, 0.6);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            margin-bottom: 12px;
+            border-radius: 14px;
+            margin-bottom: 14px;
             overflow: hidden;
+            transition: border-color 0.25s ease;
+        }
+
+        .accordion-item:hover {
+            border-color: rgba(59, 130, 246, 0.4);
         }
 
         .accordion-btn {
             width: 100%;
             background: none;
             border: none;
-            padding: 18px 20px;
+            padding: 20px 24px; /* زيادة المسافات الداخلية */
             color: var(--text-main);
             font-size: 1.05rem;
             font-weight: 700;
@@ -380,6 +492,11 @@
             align-items: center;
             cursor: pointer;
             text-align: right;
+            transition: background 0.2s;
+        }
+
+        .accordion-btn:hover {
+            background-color: rgba(255, 255, 255, 0.02);
         }
 
         .accordion-btn i.fa-chevron-down {
@@ -394,20 +511,20 @@
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            padding: 0 20px;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+            padding: 0 24px;
             color: var(--text-sub);
-            font-size: 0.95rem;
+            font-size: 0.98rem;
             background-color: rgba(0, 0, 0, 0.2);
         }
 
         .accordion-item.active .accordion-content {
             max-height: 300px;
-            padding: 15px 20px 20px 20px;
+            padding: 18px 24px 24px 24px; /* زيادة التباعد الداخلي */
             border-top: 1px solid var(--border-color);
         }
 
-        /* Image View Lightbox */
+        /* Image View Modal */
         .modal {
             position: fixed;
             top: 0;
@@ -436,13 +553,42 @@
             border: 3px solid var(--primary-blue);
         }
 
+        /* 6. Footer Links & Styling */
         footer {
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0;
             color: var(--text-sub);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             border-top: 1px solid var(--border-color);
-            margin-top: 40px;
+            margin-top: 50px;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-socials a {
+            color: var(--text-sub);
+            font-size: 1.2rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--btn-bg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            text-decoration: none;
+        }
+
+        .footer-socials a:hover {
+            color: var(--hover-blue);
+            border-color: var(--primary-blue);
+            transform: translateY(-3px);
         }
 
         @media (max-width: 600px) {
@@ -458,20 +604,24 @@
 </head>
 <body>
 
-    <!-- Header Bar -->
+    <!-- Background Accents -->
+    <div class="bg-blob-1"></div>
+    <div class="bg-blob-2"></div>
+
+    <!-- Header Navigation -->
     <header>
         <div class="header-brand">
             <button class="menu-btn" id="open-sidebar">
                 <i class="fa-solid fa-bars"></i>
             </button>
             <div class="brand-profile" id="header-profile-btn">
-                <img src="profile.jpg" alt="Wael Abdulaziz" class="profile-thumb" id="thumb-img" onerror="this.src='https://via.placeholder.com/150/2f81f7/ffffff?text=Wael'">
+                <img src="profile.jpg" alt="Wael Abdulaziz" class="profile-thumb" id="thumb-img" onerror="this.src='https://via.placeholder.com/150/3b82f6/ffffff?text=Wael'">
                 <span class="brand-name en-font">Wael Abdulaziz</span>
             </div>
         </div>
     </header>
 
-    <!-- Sidebar Overlay & Vertical Navigation -->
+    <!-- Sidebar Drawer -->
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
     
     <aside class="sidebar" id="sidebar">
@@ -490,16 +640,21 @@
         </ul>
     </aside>
 
-    <!-- Main Container -->
+    <!-- Main Content -->
     <div class="container">
 
-        <!-- HERO HEADER BANNER (التصميم الجديد المحدث) -->
+        <!-- Hero Header Banner -->
         <div class="hero-banner" id="hero">
             <div class="hero-header-wrapper">
-                <img src="profile.jpg" alt="Wael Abdulaziz" class="hero-profile-img" id="hero-img" onerror="this.src='https://via.placeholder.com/150/2f81f7/ffffff?text=Wael'">
+                <img src="profile.jpg" alt="Wael Abdulaziz" class="hero-profile-img" id="hero-img" onerror="this.src='https://via.placeholder.com/150/3b82f6/ffffff?text=Wael'">
                 <div class="hero-text-details">
-                    <h1 class="en-font">Wael Abdulaziz</h1>
-                    <div class="hero-title-sub en-font">Software Engineer & Systems Support Specialist</div>
+                    <h1 class="en-font gradient-text">Wael Abdulaziz</h1>
+                    <div class="hero-title-sub en-font gradient-text">Software Engineer & Systems Support Specialist</div>
+                    <br>
+                    <!-- Availability Badge -->
+                    <div class="availability-badge en-font">
+                        <span class="pulse-dot"></span> Available for projects / hiring
+                    </div>
                 </div>
             </div>
 
@@ -508,7 +663,7 @@
             </p>
 
             <div class="hero-contact-buttons en-font">
-                <a href="mailto:wael@example.com" class="contact-btn">
+                <a href="mailto:wael@example.com" class="contact-btn primary">
                     <i class="fa-solid fa-envelope"></i> Email Me
                 </a>
                 <a href="tel:+967777546622" class="contact-btn">
@@ -525,55 +680,55 @@
 
         <!-- 1. نبذة عني -->
         <div class="card" id="about">
-            <h2 class="card-title"><i class="fa-solid fa-user-gear"></i> نبذة عني</h2>
+            <h2 class="card-title"><i class="fa-solid fa-user-gear gradient-text"></i> <span class="gradient-text">نبذة عني</span></h2>
             <p style="color: var(--text-sub); font-size: 1.05rem;">
                 مهندس برمجيات متخصص في بناء وتطوير تطبيقات الويب الحديثة وحلول الأنظمة المتكاملة. أمتلك خبرة عملية في إدارة وتحسين قواعد البيانات، وفحص وتأمين الأكواد البرمجية، ومعالجة المشكلات الفنية المعقدة في البيئات التشغيلية. يساند شغفي البرمجي تحصيل علمي متقدم في مجال الأمن السيبراني والشبكات، مما يتيح لي تقديم حلول برمجية عالية الأداء وآمنة تماماً.
             </p>
         </div>
 
-        <!-- 2. المهارات التقنية -->
+        <!-- 2. المهارات التقنية بالرموز والزجاج الشفاف -->
         <div class="card" id="skills">
-            <h2 class="card-title"><i class="fa-solid fa-code"></i> المهارات التقنية الاحترافية</h2>
+            <h2 class="card-title"><i class="fa-solid fa-code gradient-text"></i> <span class="gradient-text">المهارات التقنية الاحترافية</span></h2>
             
             <div class="skills-category">
                 <div class="category-title"><i class="fa-solid fa-laptop-code"></i> تطوير الويب ولغات البرمجة (Web & Languages)</div>
                 <div class="skills-grid">
-                    <span class="skill-badge">Python</span>
-                    <span class="skill-badge">JavaScript</span>
-                    <span class="skill-badge">PHP</span>
-                    <span class="skill-badge">C#</span>
-                    <span class="skill-badge">HTML5 / CSS3</span>
+                    <span class="skill-badge"><i class="fa-brands fa-python"></i> Python</span>
+                    <span class="skill-badge"><i class="fa-brands fa-js"></i> JavaScript</span>
+                    <span class="skill-badge"><i class="fa-brands fa-php"></i> PHP</span>
+                    <span class="skill-badge"><i class="fa-solid fa-code"></i> C#</span>
+                    <span class="skill-badge"><i class="fa-brands fa-html5"></i> HTML5 / CSS3</span>
                 </div>
             </div>
 
             <div class="skills-category">
                 <div class="category-title"><i class="fa-solid fa-database"></i> قواعد البيانات والأنظمة (Databases & Systems)</div>
                 <div class="skills-grid">
-                    <span class="skill-badge">MySQL</span>
-                    <span class="skill-badge">PostgreSQL</span>
-                    <span class="skill-badge">SQL Server</span>
-                    <span class="skill-badge">Linux Administration</span>
+                    <span class="skill-badge"><i class="fa-solid fa-database"></i> MySQL</span>
+                    <span class="skill-badge"><i class="fa-solid fa-server"></i> PostgreSQL</span>
+                    <span class="skill-badge"><i class="fa-solid fa-hard-drive"></i> SQL Server</span>
+                    <span class="skill-badge"><i class="fa-brands fa-linux"></i> Linux Administration</span>
                 </div>
             </div>
 
             <div class="skills-category">
                 <div class="category-title"><i class="fa-solid fa-shield-halved"></i> الأمن السيبراني والأدوات (Security & Tools)</div>
                 <div class="skills-grid">
-                    <span class="skill-badge">Google Cybersecurity</span>
-                    <span class="skill-badge">Networking (TCP/IP, DNS)</span>
-                    <span class="skill-badge">Git & GitHub</span>
-                    <span class="skill-badge">API Testing</span>
+                    <span class="skill-badge"><i class="fa-brands fa-google"></i> Google Cybersecurity</span>
+                    <span class="skill-badge"><i class="fa-solid fa-network-wired"></i> Networking (TCP/IP, DNS)</span>
+                    <span class="skill-badge"><i class="fa-brands fa-git-alt"></i> Git & GitHub</span>
+                    <span class="skill-badge"><i class="fa-solid fa-gears"></i> API Testing</span>
                 </div>
             </div>
         </div>
 
         <!-- 3. نماذج الأعمال -->
         <div class="card" id="projects">
-            <h2 class="card-title"><i class="fa-solid fa-layer-group"></i> نماذج الأعمال والخدمات</h2>
+            <h2 class="card-title"><i class="fa-solid fa-layer-group gradient-text"></i> <span class="gradient-text">نماذج الأعمال والخدمات</span></h2>
 
             <div class="accordion-item">
                 <button class="accordion-btn">
-                    <span><i class="fa-solid fa-desktop" style="margin-left:8px;"></i> تصميم وتطوير الواجهات (Frontend Development)</span>
+                    <span><i class="fa-solid fa-desktop" style="margin-left:8px; color: var(--primary-blue);"></i> تصميم وتطوير الواجهات (Frontend Development)</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
@@ -583,7 +738,7 @@
 
             <div class="accordion-item">
                 <button class="accordion-btn">
-                    <span><i class="fa-solid fa-server" style="margin-left:8px;"></i> بناء الأنظمة الخلفية وربط APIs</span>
+                    <span><i class="fa-solid fa-server" style="margin-left:8px; color: var(--primary-blue);"></i> بناء الأنظمة الخلفية وربط APIs</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
@@ -593,7 +748,7 @@
 
             <div class="accordion-item">
                 <button class="accordion-btn">
-                    <span><i class="fa-solid fa-database" style="margin-left:8px;"></i> إدارة وتأمين قواعد البيانات</span>
+                    <span><i class="fa-solid fa-database" style="margin-left:8px; color: var(--primary-blue);"></i> إدارة وتأمين قواعد البيانات</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
@@ -604,25 +759,25 @@
 
         <!-- 4. الشهادات والتعليم -->
         <div class="card" id="certifications">
-            <h2 class="card-title"><i class="fa-solid fa-graduation-cap"></i> التعليم والشهادات</h2>
+            <h2 class="card-title"><i class="fa-solid fa-graduation-cap gradient-text"></i> <span class="gradient-text">التعليم والشهادات</span></h2>
             
             <div class="accordion-item">
                 <button class="accordion-btn">
-                    <span><i class="fa-solid fa-user-graduate" style="margin-left:8px;"></i> بكالوريوس تكنولوجيا المعلومات</span>
+                    <span><i class="fa-solid fa-user-graduate" style="margin-left:8px; color: var(--primary-blue);"></i> بكالوريوس تكنولوجيا المعلومات</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    <p>جامعة الحكمة (2018 - 2022). دراسة متخصصة ومكثفة على مدار 4 سنوات تناولت دورة حياة التطبيقات وهندسة البرمجيات وإدارة الشبكات وقواعد البيانات.</p>
+                    <p>جامعة الحكمة (2018 - 2022)[span_0](start_span)[span_0](end_span). دراسة متخصصة ومكثفة على مدار 4 سنوات تناولت دورة حياة التطبيقات وهندسة البرمجيات وإدارة الشبكات وقواعد البيانات[span_1](start_span)[span_1](end_span).</p>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <button class="accordion-btn">
-                    <span><i class="fa-solid fa-certificate" style="margin-left:8px;"></i> شهادة Google الاحترافية للأمن السيبراني</span>
+                    <span><i class="fa-solid fa-certificate" style="margin-left:8px; color: var(--primary-blue);"></i> شهادة Google الاحترافية للأمن السيبراني</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    <p>منصة Coursera: برنامج احترافي متقدم يغطي اكتشاف الثغرات، حماية الشبكات، وإدارة الأزمات السيبرانية لتحسين الأمان التشغيلي للتطبيقات.</p>
+                    <p>منصة Coursera: برنامج احترافي متقدم يغطي اكتشاف الثغرات، حماية الشبكات، وإدارة الأزمات السيبرانية لتحسين الأمان التشغيلي للتطبيقات[span_2](start_span)[span_2](end_span).</p>
                 </div>
             </div>
 
@@ -630,6 +785,11 @@
 
         <!-- Footer -->
         <footer>
+            <div class="footer-socials en-font">
+                <a href="https://github.com/wael-aziiz" target="_blank"><i class="fa-brands fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="mailto:wael@example.com"><i class="fa-solid fa-envelope"></i></a>
+            </div>
             <p class="en-font">© 2026 Wael Abdulaziz. All Rights Reserved.</p>
         </footer>
 
@@ -663,7 +823,7 @@
         closeBtn.addEventListener('click', closeSidebar);
         overlay.addEventListener('click', closeSidebar);
 
-        // Active State & Auto Close Navigation
+        // Navigation Active State
         navItems.forEach(item => {
             item.addEventListener('click', function() {
                 navItems.forEach(nav => nav.classList.remove('active'));
@@ -684,7 +844,7 @@
             });
         });
 
-        // Profile Image Modal (View Picture)
+        // Profile Image Lightbox
         const modal = document.getElementById('image-modal');
         const modalImg = document.getElementById('modal-img-src');
         const thumbImg = document.getElementById('thumb-img');
